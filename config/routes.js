@@ -10,19 +10,5 @@
 
 module.exports.routes = {
 
-  // Resources endPoints
 
-  '/api/info': {
-    controller: 'InfoController',
-    action: 'index'
-  },
-
-  '/swagger/doc': {
-    cors: {
-      origin: '*',
-      methods: 'GET,OPTIONS,HEAD'
-    },
-    controller: 'SwaggerController',
-    action: 'doc'
-  }
 }
