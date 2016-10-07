@@ -26,8 +26,8 @@ module.exports = {
     var name = req.param("name");
     var redirectURI = req.param("redirectURI");
 
-    Client.create({ name : name,
-                    redirectURI: redirectURI
+    Client.create({
+        name : name
     }).exec(function(err, client){
       if(err){
         return res.send(500, {error: err.message});
@@ -59,6 +59,4 @@ module.exports = {
    * (specific to ClientController)
    */
   _config: {}
-
-
 };

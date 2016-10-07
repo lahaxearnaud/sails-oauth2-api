@@ -10,19 +10,6 @@
 
 module.exports.routes = {
 
-  // Client authorization endPoints 
-
-  '/': {
-    view: 'index'
-  },
-  'get /login': {
-    view: 'login'
-  },
-  'get /logout': {
-    controller: 'Auth',
-    action: 'logout'
-  },
-
   // Resources endPoints
 
   '/api/info': {

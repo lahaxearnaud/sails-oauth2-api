@@ -8,80 +8,97 @@
  * http://sailsjs.org/#documentation
  */
 
-module.exports.bootstrap = function (cb) {
-
+module.exports.bootstrap = function(cb) {
   // Create a user
-  User.findOne({email: 'me@gmail.com'}, function(err, user){
-    if(!user){
+  User.findOne({
+    username: 'TwNkQTAk9j3JwQEu'
+  }, function(err, user) {
+    sails.log.blank();
+    var password = 'QGUeUdtHdq9Zh6Y2RP4wpgcpgMpFgC';
+    if (!user) {
       User.create({
-  	email: 'me@gmail.com',
-  	password: 'password',
-      }).exec(function(err,user){
-  	console.log("Default user created");
-        console.log("- username: " + user.email);
-        console.log("- password: password");
+        username: 'TwNkQTAk9j3JwQEu',
+        password: password,
+        // only admin of the application at the moment
+        admin: true
+      }).exec(function(err, user) {
+        if (err) {
+          sails.log.error(err.message);
+          return;
+        }
+        sails.log.info("Default admin user created");
+        sails.log.info("- username: " + user.username);
+        sails.log.info("- password: " + password);
+        sails.log.blank();
       });
     } else {
-      console.log('Default user already exists');
-      console.log("- username: " + user.email);
-      console.log("- password: password");
+      sails.log.info('Default admin user already exists');
+      sails.log.info("- username: " + user.username);
+      sails.log.info("- password: " + password);
+      sails.log.blank();
     }
   });
 
-  // Create a trusted application
-  Client.findOne({'name': 'trustedTestClient'}, function(err, client){
-    if(err){
-      console.log(err.message);
-    } else {
-      if(!client){
-        Client.create({name : 'trustedTestClient',
-                       redirectURI: 'http://localhost:1338',
-                       trusted: true
-        }).exec(function(err, client){
-          if(err){
-            console.log(err.message);
-          } else {
-            console.log("trustedTestClient created");
-            console.log("- client_id: " + client.clientId);
-            console.log("- client_secret: " + client.clientSecret);
-            console.log("- redirectURI: " + client.redirectURI);
-          }
-        });
-      } else {
-        console.log('trustedTestClient already exists');
-        console.log("- client_id: " + client.clientId);
-        console.log("- client_secret: " + client.clientSecret);
-        console.log("- redirectURI: " + client.redirectURI);
-      }
-    }
-  }); 
 
-  // Create an untrusted application
-  Client.findOne({'name': 'untrustedTestClient'}, function(err, client){
-    if(err){
-      console.log(err.message);
+  // Create a user
+  User.findOne({
+    username: 'FN74CTMaHah5hcBM'
+  }, function(err, user) {
+    sails.log.blank();
+    var password = '2d4xarAB5yfypKFx8HqRZ9dWsa9kJ5';
+    if (!user) {
+      User.create({
+        username: 'FN74CTMaHah5hcBM',
+        password: password,
+        admin: false
+      }).exec(function(err, user) {
+        if (err) {
+          sails.log.error(err.message);
+          return;
+        }
+        sails.log.info("Default user created");
+        sails.log.info("- username: " + user.username);
+        sails.log.info("- password: " + password);
+        sails.log.blank();
+      });
     } else {
-      if(!client){
-        Client.create({name : 'untrustedTestClient',
-                       redirectURI: 'http://localhost:1339'
-        }).exec(function(err, client){
-          if(err){
-            console.log(err.message);
+      sails.log.info('Default user already exists');
+      sails.log.info("- username: " + user.username);
+      sails.log.info("- password: " + password);
+      sails.log.blank();
+    }
+  });
+
+
+  // Create a trusted application
+  Client.findOne({
+    name: 'ApiClient'
+  }, function(err, client) {
+    sails.log.blank();
+    if (err) {
+      sails.log.error(err.message);
+    } else {
+      if (!client) {
+        Client.create({
+          name: 'ApiClient'
+        }).exec(function(err, client) {
+          if (err) {
+            sails.log.error(err.message);
           } else {
-            console.log("untrustedTestClient created");
-            console.log("- client_id: " + client.clientId);
-            console.log("- client_secret: " + client.clientSecret);
-            console.log("- redirectURI: " + client.redirectURI);
+            sails.log.info("ApiClient created");
+            sails.log.info("- client_id: " + client.clientId);
+            sails.log.info("- client_secret: " + client.clientSecret);
+            sails.log.blank();
           }
         });
       } else {
-        console.log('untrustedTestClient already exists');
-        console.log("- client_id: " + client.clientId);
-        console.log("- client_secret: " + client.clientSecret);
-        console.log("- redirectURI: " + client.redirectURI);
+        sails.log.info('ApiClient already exists');
+        sails.log.info("- client_id: " + client.clientId);
+        sails.log.info("- client_secret: " + client.clientSecret);
+        sails.log.blank();
       }
     }
-  }); 
+  });
 
   cb();
 };

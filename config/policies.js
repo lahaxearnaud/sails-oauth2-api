@@ -26,10 +26,10 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  '*': true,
-
-  InfoController: {
-    'index': 'oauthBearer'
-  }
-
+  
+  '*': 'oauthBearer',
+  'ClientController': {
+      '*': ['oauthBearer', 'admin'],
+  },
+  '/oauth/token':true,
 };

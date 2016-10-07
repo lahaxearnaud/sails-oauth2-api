@@ -16,51 +16,6 @@ var bcrypt = require('bcrypt'),
       });
     });
 
-    /**
-     * LocalStrategy
-     *
-     * This strategy is used to authenticate users based on a username and password.
-     * Anytime a request is made to authorize an application, we must ensure that
-     * a user is logged in before asking them to approve the request.
-     */
-     passport.use(
-     new LocalStrategy(
-
-     function (username, password, done) {
-
-         process.nextTick(
-
-
-         function () {
-             User.findOne({
-                 email: username
-             }).exec(function (err, user) {
-                 if (err) {
-                     console.log(err);
-                     return;
-                 }
-
-                 if (!user) {
-                     return done(
-                     null, false, {
-                         message: 'Unknown user ' + username
-                     });
-                 }
-
-                 bcrypt.compare(password, user.hashedPassword, function(err, res){
-                   if(err){
-                     return done(err, null);
-                   } else {
-                     if (!res) {
-                       return done( null, false, { message: 'Invalid password' });
-                     } else {
-                       return done(null, user);
-                     }
-                   }
-                 });
-             })
-         });
-     }));
 
 /**
  * BasicStrategy & ClientPasswordStrategy

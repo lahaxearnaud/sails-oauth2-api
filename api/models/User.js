@@ -11,12 +11,16 @@ var bcrypt = require('bcrypt');
 module.exports = {
 
   attributes: {
-        email: {
+        username: {
             type: 'string',
             required: true
         },
         hashedPassword: {
             type: 'string',
+        },
+        admin: {
+          type: 'boolean',
+          defaultsTo: false
         },
         // Override toJSON method to remove password from API
         toJSON: function() {
