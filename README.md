@@ -1,4 +1,4 @@
-Sails-OAuth2-API
+Rest API starter
 ----------------
 
 Purposes
@@ -9,33 +9,7 @@ Several purposes of this application:
 * integrate OAuth2 to protect a REST API developped with sailsjs
 
 
-Status
-------
-
-- Migrated to sails 0.11
-
-- available flows
-  * Authorization code
-  * Resource owner password
-  * Implicit flow (not functional yet)
-
-- models implemented
-  * User: resource owner
-  * Client: application willing to use the user's resource
-  * AccessToken: token used by the client each time the API is called with the user's identity
-  * RefreshToken: token used to get a new AccessToken
-
-- controllers
-  * InfoController: a basic controller that will be called to test the OAuth mecanism
-  * Client controller: used to manage client (only create and list). This controller will be used by administrators
-
-- authentication
-  * config/passport.js: defining passport strategy
-
-- OAuth service
-  * config/oauth2.js defining the OAuth server and the exchange strategy
-
-Details
+Oauth
 -------
 
 When lifting the sails application, a default user and 2 defaults clients are created (among which one is trusted and the other is not).
@@ -68,3 +42,28 @@ Once the access_token is retrieved, it needs to be passed in the Authorization h
 ```
 curl -H 'Authorization: Bearer ACCESS_TOKEN' -GET "http://localhost:1337/api/info
 ```
+
+API
+-------
+
+**Generate Rest CRUD**
+
+```bash
+sails generate api Tag
+```
+
+**Edit Model**
+
+File `api/models/Tag.js` contains model definition and validators.
+
+**Routes generated**
+
+```bash
+GET    /tags
+POST   /tags
+PUT    /tags/:id
+DELETE /tags/:id
+... 
+```
+
+Now focus on your front =)

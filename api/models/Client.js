@@ -19,8 +19,8 @@ module.exports = {
   },
 
   beforeCreate: function(values, next) {
-    values.clientId = UtilsService.uid(30);
-    values.clientSecret = UtilsService.uid(30);
+    values.clientId = UtilsService.uidLight(50);
+    values.clientSecret = UtilsService.uid(50);
     next();
   }
 

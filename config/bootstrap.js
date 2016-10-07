@@ -11,41 +11,10 @@
 module.exports.bootstrap = function(cb) {
   // Create a user
   User.findOne({
-    username: 'TwNkQTAk9j3JwQEu'
-  }, function(err, user) {
-    sails.log.blank();
-    var password = 'QGUeUdtHdq9Zh6Y2RP4wpgcpgMpFgC';
-    if (!user) {
-      User.create({
-        username: 'TwNkQTAk9j3JwQEu',
-        password: password,
-        // only admin of the application at the moment
-        admin: true
-      }).exec(function(err, user) {
-        if (err) {
-          sails.log.error(err.message);
-          return;
-        }
-        sails.log.info("Default admin user created");
-        sails.log.info("- username: " + user.username);
-        sails.log.info("- password: " + password);
-        sails.log.blank();
-      });
-    } else {
-      sails.log.info('Default admin user already exists');
-      sails.log.info("- username: " + user.username);
-      sails.log.info("- password: " + password);
-      sails.log.blank();
-    }
-  });
-
-
-  // Create a user
-  User.findOne({
     username: 'FN74CTMaHah5hcBM'
   }, function(err, user) {
     sails.log.blank();
-    var password = '2d4xarAB5yfypKFx8HqRZ9dWsa9kJ5';
+    var password = UtilsService.uid(50);
     if (!user) {
       User.create({
         username: 'FN74CTMaHah5hcBM',
@@ -69,6 +38,35 @@ module.exports.bootstrap = function(cb) {
     }
   });
 
+  // Create an admin user
+  User.findOne({
+    username: 'TwNkQTAk9j3JwQEu'
+  }, function(err, user) {
+    sails.log.blank();
+    var password = UtilsService.uid(50);
+    if (!user) {
+      User.create({
+        username: 'TwNkQTAk9j3JwQEu',
+        password: password,
+        // only admin of the application at the moment
+        admin: true
+      }).exec(function(err, user) {
+        if (err) {
+          sails.log.error(err.message);
+          return;
+        }
+        sails.log.info("Default admin user created");
+        sails.log.info("- username: " + user.username);
+        sails.log.info("- password: " + password);
+        sails.log.blank();
+      });
+    } else {
+      sails.log.info('Default admin user already exists');
+      sails.log.info("- username: " + user.username);
+      sails.log.info("- password: " + password);
+      sails.log.blank();
+    }
+  });
 
   // Create a trusted application
   Client.findOne({
