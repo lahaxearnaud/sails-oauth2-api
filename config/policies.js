@@ -31,5 +31,8 @@ module.exports.policies = {
   'ClientController': {
       '*': ['oauthBearer', 'admin'],
   },
+  'SwaggerController': {
+      '*': true,
+  },
   '/oauth/token':true,
 };

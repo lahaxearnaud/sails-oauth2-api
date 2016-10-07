@@ -17,4 +17,12 @@ module.exports.routes = {
     action: 'index'
   },
 
+  '/swagger/doc': {
+    cors: {
+      origin: '*',
+      methods: 'GET,OPTIONS,HEAD'
+    },
+    controller: 'SwaggerController',
+    action: 'doc'
+  }
 }
